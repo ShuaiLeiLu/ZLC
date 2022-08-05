@@ -17,7 +17,7 @@ import (
 
 func main() {
 	//机器人初始化
-	bot, err := tgbotapi.NewBotAPI("5429684513:AAGFMc4RqOv-aVR635xvizZedY71MR8zfIs")
+	bot, err := tgbotapi.NewBotAPI("机器人token")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -40,7 +40,12 @@ func main() {
 	go http.ListenAndServe(":8443", nil)
 
 	//连接数据库
-	db, err := sql.Open("mysql", "root:lushuailei@tcp(1.117.150.173:3306)/zlc")
+	/* 数据库密码
+
+	用户:密码@tcp(ip:3306)/数据库
+
+	*/
+	db, err := sql.Open("mysql", "数据库")
 
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
@@ -59,7 +64,7 @@ func main() {
 		MaxActive:   10000,
 		IdleTimeout: 180 * time.Second,
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", "1.117.150.173:6379", redis.DialPassword("lushuailei"), redis.DialDatabase(0))
+			c, err := redis.Dial("tcp", "redis地址:6379", redis.DialPassword("密码"), redis.DialDatabase(0))
 			if err != nil {
 				return nil, err
 			}

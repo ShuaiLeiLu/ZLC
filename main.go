@@ -23,14 +23,15 @@ func main() {
 		MaxActive:   10000,
 		IdleTimeout: 180 * time.Second,
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", "1.117.150.173:6379", redis.DialPassword("lushuailei"), redis.DialDatabase(0))
+		/* 填写redis 地址和密码 */
+			c, err := redis.Dial("tcp", "地址:6379", redis.DialPassword("密码"), redis.DialDatabase(0))
 			if err != nil {
 				return nil, err
 			}
 			return c, nil
 		},
 	}
-	//rs, _ := redis.Dial("tcp", "127.0.0.1:6379", redis.DialPassword("ddoyyds"), redis.DialDatabase(0))
+	
 	fmt.Printf("OK!")
 
 	e.GET("/bean", func(c echo.Context) error {
